@@ -30,14 +30,14 @@ function walk(node)
 			break;
 
 		case 3: // Text node
-			handleText(node);
+			node.nodeValue = handleText(node.nodeValue);
 			break;
 	}
 }
 
-function handleText(textNode) 
+function handleText(text)
 {
-	textNode.nodeValue = textNode.nodeValue
+	return text
 		.replace(/\baws lambda\b/gi, "AWS Common Gateway Interface")
 		.replace(/\bserverless\b/gi, "cgi-bin")
 		.replace(/\bcgi-bin architectures?\b/gi, "Common Gateway Interface architecture")
