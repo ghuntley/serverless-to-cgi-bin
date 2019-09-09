@@ -30,29 +30,19 @@ function walk(node)
 			break;
 
 		case 3: // Text node
-			handleText(node);
+			node.nodeValue = handleText(node.nodeValue);
 			break;
 	}
 }
 
-function handleText(textNode) 
+function handleText(text)
 {
-	var v = textNode.nodeValue;
-
-	v = v.replace(/\bAWS Lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\bAWS lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\baws Lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\baws lambda\b/g, "AWS Common Gateway Interface");
-
-	v = v.replace(/\bServerless\b/g, "cgi-bin");
-	v = v.replace(/\bserverless\b/g, "cgi-bin");
-
-	v = v.replace(/\bcgi-bin architecture\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin architectures\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin Architecture\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin Architectures\b/g, "Common Gateway Interface architecture");
-	
-	textNode.nodeValue = v;
+	return text
+		.replace(/\baws lambda\b/gi, "AWS Common Gateway Interface")
+		.replace(/\bserverless\b/gi, "cgi-bin")
+		.replace(/\bcgi-bin architectures?\b/gi, "Common Gateway Interface architecture")
+		//.replace(/\bcontainer\b/gi, "chroot")
+		//.replace(/\belectron\b/gi, "JVM")
 }
 
 
